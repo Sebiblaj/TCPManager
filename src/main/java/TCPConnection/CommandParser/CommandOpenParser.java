@@ -17,7 +17,7 @@ public class CommandOpenParser implements CommandParser {
             "^open\\s+((?:\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}|localhost)?)\\s+(\\d{1,5})(?:\\s+(\\S+))?$");
 
     @Override
-    public Command parse(String stringCommand) {
+    public Command parse(String stringCommand,Object o) {
         Matcher matcher = pattern_bind.matcher(stringCommand);
         if (matcher.matches()) {
             String localIP = matcher.group(1);

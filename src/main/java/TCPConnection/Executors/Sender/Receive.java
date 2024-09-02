@@ -47,7 +47,7 @@ public class Receive implements Runnable, MessageReceiver, MessageProducer {
             Message message = null;
 
             for (MessageWrapperParser parser : messageWrapperParsers) {
-                messageWrapper = parser.parse(received);
+                messageWrapper = parser.parse(received,socket);
                 if (messageWrapper != null && messageWrapper.lastIndex() >= 0) {
                     receivedBuilder.delete(0, messageWrapper.lastIndex());
                     message=messageWrapper.message();
@@ -92,12 +92,12 @@ public class Receive implements Runnable, MessageReceiver, MessageProducer {
 
     @Override
     public synchronized void subscribe(Consumer<Message> consumer) {
-        observer.subscribe(consumer);
+        if(consumer!=null) {observer.subscribe(consumer);}
     }
 
     @Override
     public synchronized void unsubscribe(Consumer<Message> consumer) {
-        observer.unsubscribe(consumer);
+        if(consumer!=null)observer.unsubscribe(consumer);
     }
 
     @Override

@@ -20,7 +20,8 @@ public class CommandMapper implements StringConsumer, CommandProducer, ICommandM
             new CommandDisplayClientsParser(),
             new CommandConnectedParser(),
             new CommandSendParser(),
-            new CommandDisconnectParser()
+            new CommandDisconnectParser(),
+            new CommandSendToSocketParser()
     };
 
     public CommandMapper(StringProducer... stringProducers) {
@@ -55,7 +56,7 @@ public class CommandMapper implements StringConsumer, CommandProducer, ICommandM
     public void mapStringToCommand(String string) {
         boolean commandFound = false;
         for (CommandParser parser : commandParsers) {
-            Command command = parser.parse(string);
+            Command command = parser.parse(string,null);
             if (command != null) {
                 commandFound = true;
                 notifyObserver(command);

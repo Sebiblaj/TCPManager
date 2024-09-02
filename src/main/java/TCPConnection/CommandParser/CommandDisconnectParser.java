@@ -10,8 +10,9 @@ public class CommandDisconnectParser implements CommandParser {
 
     private final Pattern pattern = Pattern.compile("^disconnect\\s+(client|server)\\s+((\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})|localhost)\\s+(\\d{1,5})$");
 
+
     @Override
-    public Command parse(String stringCommand) {
+    public Command parse(String stringCommand, Object s) {
         Matcher matcher = pattern.matcher(stringCommand);
         if (matcher.matches()) {
             String type = matcher.group(1);
@@ -25,4 +26,5 @@ public class CommandDisconnectParser implements CommandParser {
         }
         return null;
     }
+
 }

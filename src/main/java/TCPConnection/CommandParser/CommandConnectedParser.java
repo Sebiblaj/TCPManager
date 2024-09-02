@@ -12,7 +12,7 @@ public class CommandConnectedParser implements CommandParser {
             "^display\\s+connected\\s+((\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})|localhost)\\s+(\\d{1,5})$");
 
     @Override
-    public Command parse(String stringCommand) {
+    public Command parse(String stringCommand,Object o) {
         Matcher matcher = pattern.matcher(stringCommand);
         if (matcher.matches()) {
             String host = matcher.group(1);
@@ -21,4 +21,5 @@ public class CommandConnectedParser implements CommandParser {
         }
         return null;
     }
+
 }

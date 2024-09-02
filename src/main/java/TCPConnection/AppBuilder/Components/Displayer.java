@@ -9,7 +9,7 @@ import Producer.CommandProducer;
 
 public class Displayer {
 
-    public Displayer(CommandProducer commandMapper, ServerSocketActions serverSocketActions, EnhancedSocketActions enhancedSocketActions){
+    public Displayer(CommandProducer[] commandMapper, ServerSocketActions serverSocketActions, EnhancedSocketActions enhancedSocketActions){
         new DisplayServersMapper(serverSocketActions,commandMapper);
         new DisplayClientsMapper(enhancedSocketActions,commandMapper);
         new DisplayConnectedMapper(serverSocketActions,commandMapper);

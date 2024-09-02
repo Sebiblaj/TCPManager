@@ -9,7 +9,7 @@ import Producer.CommandProducer;
 
 public class Messager {
 
-    public Messager(CommandProducer commandMapper, EnhancedSocketActions enhancedSocketActions, ServerSocketActions serverSocketActions){
+    public Messager(CommandProducer[] commandMapper, EnhancedSocketActions enhancedSocketActions, ServerSocketActions serverSocketActions){
         MessageFactory messageFactory=new ConcreteMessageFactory();
         new MessageMapper(serverSocketActions,enhancedSocketActions,messageFactory,commandMapper);
     }

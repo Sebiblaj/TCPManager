@@ -19,7 +19,8 @@ public class EnhancedSocketPoolManager implements EnhancedSocketActions {
     @Override
     public void add(SocketEnhanced socketEnhanced) {
          socketEnhancedList.add(socketEnhanced);
-         System.out.println("EnhancedSocketPoolManager: Adding " + socketEnhanced);
+         if(socketEnhanced.getSocket()!=null)
+           System.out.println("EnhancedSocketPoolManager: Adding " + socketEnhanced.getSocket());
     }
 
     @Override

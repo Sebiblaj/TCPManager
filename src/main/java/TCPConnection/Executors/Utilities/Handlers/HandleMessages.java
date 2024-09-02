@@ -41,8 +41,6 @@ public class HandleMessages {
     public static void sendDisconnectionMessage(SocketEnhanced socketEnhanced) {
         if (socketEnhanced != null && !socketEnhanced.getSocket().isClosed()) {
             sendMessage(socketEnhanced.getSocket(), new Message("A client has disconnected"));
-        } else {
-            System.out.println("Socket is not connected or closed.");
         }
     }
 
@@ -54,8 +52,6 @@ public class HandleMessages {
             } catch (Exception e) {
                 System.out.println("Error closing socket: " + e.getMessage());
             }
-        } else {
-            System.out.println("Socket is not connected or closed.");
         }
     }
 }

@@ -1,22 +1,23 @@
 package CommandParser;
 
-import Command.Command;
-import Command.CommandSend;
+import Command.*;
 import CommandParser.Interfaces.CommandParser;
 
+import java.net.Socket;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CommandSendParser implements CommandParser {
+public class CommandSendToSocketParser implements CommandParser {
 
     private final Pattern pattern = Pattern.compile("^send\\s+(.*)$");
 
     @Override
-    public Command parse(String stringCommand,Object o) {
-        Matcher matcher = pattern.matcher(stringCommand);
+    public Command parse(String s, Object object) {
+        Matcher matcher = pattern.matcher(s);
         if (matcher.matches()) {
             String message=matcher.group(1);
-            return new CommandSend(message);
+            if(object instanceof Socket socket)
+              return new CommandSendWithSocket(socket,message);
         }
         return null;
     }

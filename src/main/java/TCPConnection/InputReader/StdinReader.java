@@ -2,13 +2,14 @@ package InputReader;
 
 import Observer.ObserverObservableMiddleware;
 import Producer.StringProducer;
-
-import java.util.Scanner;
 import Consumer.Consumer;
 
-public class StdinReader implements StringProducer,Runnable {
+import java.util.Scanner;
+
+public class StdinReader implements StringProducer, Runnable {
 
     private final ObserverObservableMiddleware<String> observer;
+    private volatile boolean running = true;
 
     public StdinReader() {
         this.observer = new ObserverObservableMiddleware<>();
@@ -18,12 +19,12 @@ public class StdinReader implements StringProducer,Runnable {
 
     @Override
     public void subscribe(Consumer<String> consumer) {
-         observer.subscribe(consumer);
+        observer.subscribe(consumer);
     }
 
     @Override
     public void unsubscribe(Consumer<String> consumer) {
-         observer.unsubscribe(consumer);
+        observer.unsubscribe(consumer);
     }
 
     @Override
@@ -33,11 +34,20 @@ public class StdinReader implements StringProducer,Runnable {
 
     @Override
     public void run() {
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            notifyObserver(line);
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (running && scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.equals("close")) {
+                    running = false;
+                    System.out.println("Closing connection");
+                } else {
+                    notifyObserver(line);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error reading input: " + e.getMessage());
+        } finally {
+            System.out.println("Thread exited");
         }
-
     }
 }

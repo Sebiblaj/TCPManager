@@ -12,7 +12,7 @@ public class CommandDisplayClientsParser implements CommandParser {
             "^display");
 
     @Override
-    public Command parse(String stringCommand) {
+    public Command parse(String stringCommand, Object o) {
         Matcher matcher=pattern.matcher(stringCommand);
         if(matcher.matches()){
             return new CommandDisplayClients();

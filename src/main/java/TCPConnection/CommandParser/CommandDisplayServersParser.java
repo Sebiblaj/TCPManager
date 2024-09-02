@@ -14,7 +14,7 @@ public class CommandDisplayServersParser implements CommandParser {
 
 
     @Override
-    public Command parse(String stringCommand) {
+    public Command parse(String stringCommand,Object o) {
         Matcher matcher = pattern_ip_port.matcher(stringCommand);
         if (matcher.matches()) {
             return new CommandDisplayServers();

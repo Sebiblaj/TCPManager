@@ -14,7 +14,7 @@ import Producer.CommandProducer;
 
 public class Disconnector {
 
-    public Disconnector(CommandProducer commandMapper, EnhancedSocketActions enhancedSocketActions,
+    public Disconnector(CommandProducer[] commandMapper, EnhancedSocketActions enhancedSocketActions,
                         ServerSocketActions serverSocketActions, CommandConsumer acceptConnections) {
 
         DisconnectClientFactory clientFactory = new ConcreteDisconnectClientFactory();

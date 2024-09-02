@@ -4,6 +4,7 @@ import Command.Command;
 import Command.CommandListen;
 import CommandParser.Interfaces.CommandParser;
 
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,7 +19,7 @@ public class CommandListenParser implements CommandParser {
     );
 
     @Override
-    public Command parse(String stringCommand) {
+    public Command parse(String stringCommand, Object o) {
         Matcher matcher = pattern_ip_port.matcher(stringCommand);
         if (matcher.matches()) {
             String ip = matcher.group(1);
